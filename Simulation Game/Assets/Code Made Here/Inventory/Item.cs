@@ -1,25 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public enum itemType
+[CreateAssetMenu(fileName = "New Item",menuName = "Item/Create New Item")]
+public class Item :ScriptableObject
 {
-    Consumable,
-    Clothes
-}
-public class Item
-{
-    private string Name;
-    //private int Amount;
-    private float SellPrice;
-    public Sprite Icon;
-    private itemType Type;
-    public Item(string name, float sellPrice, Sprite icon, itemType type)
+    public enum ItemType
     {
-        Name = name;
-        SellPrice = sellPrice;
-        Icon = icon;
-        Type = type;
-        //Amount = 1;
+        Consumable,
+        Clothes
     }
+    public int Id;
+    public string Name;
+    public int BuyPrice;
+    public int SellPrice;
+    public Sprite Icon;
+    public ItemType Type;
 }

@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
     public Action OnInteractPressed;
     public Action OnOpenInventory;
+    public Wallet Wallet;
+    public Inventory Inventory;
     
     [SerializeField] private Vector2 _lookDir;
     private Movement _movement;
@@ -15,11 +18,16 @@ public class PlayerController : MonoBehaviour
     private PlayerActions _playerActions;
     private PlayerInput _controls;
 
+    private void Awake()
+    {
+        Inventory = new Inventory();
+    }
+
     private void Start()
     {
-        
         _movement = GetComponent<Movement>();
         _controls = GetComponent<PlayerInput>();
+        Wallet = GetComponent<Wallet>();
         _playerActions = new PlayerActions();
         _playerActions.PlayerControls.Enable();
         _playerActions.PlayerControls.Interact.performed += Interact;
