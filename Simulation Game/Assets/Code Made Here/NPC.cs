@@ -18,12 +18,6 @@ public class NPC : MonoBehaviour
         Dialogue_Manager.instance.OnEndDialogue += OnEndDialogueListener;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color=Color.blue;
-        Gizmos.DrawWireSphere(transform.position,interactRange);
-    }
-
     private void OnInteractListener() //Todo Wait between interact inputs
     {
         if (_isInDialogue)
@@ -50,6 +44,7 @@ public class NPC : MonoBehaviour
     }
     private void Update()
     {
+        //calculate distance to player every frame
         Vector2 diff = player.transform.position - transform.position;
         _distanceToPlayer= diff.magnitude;
     }
@@ -57,5 +52,10 @@ public class NPC : MonoBehaviour
     private void OnDestroy()
     {
         player.OnInteractPressed -= OnInteractListener;
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color=Color.blue;
+        Gizmos.DrawWireSphere(transform.position,interactRange);
     }
 }

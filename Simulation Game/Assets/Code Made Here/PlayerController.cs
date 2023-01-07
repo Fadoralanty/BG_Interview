@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     private PlayerInput _controls;
     private PlayerActions _playerActions;
 
-
     private void Start()
     {
         

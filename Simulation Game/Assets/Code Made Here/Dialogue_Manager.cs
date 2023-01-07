@@ -73,11 +73,10 @@ public class Dialogue_Manager : MonoBehaviour
     public void EndDialogue()
     {
         OnEndDialogue?.Invoke();
-        Debug.Log("Dialogue Ended");
-        dialogueCanvas.SetActive(false);
+        CloseDialogueCanvas();
     }
 
-    public void CloseDialogue()
+    public void CloseDialogueCanvas()
     {
         dialogueCanvas.SetActive(false);
     }
