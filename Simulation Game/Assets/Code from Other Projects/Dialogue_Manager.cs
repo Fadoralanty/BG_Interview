@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Dialogue_Manager : MonoBehaviour
 {
     public static Dialogue_Manager instance;
+    public Action OnEndDialogue;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private GameObject dialogueCanvas;
@@ -71,6 +72,8 @@ public class Dialogue_Manager : MonoBehaviour
 
     public void EndDialogue()
     {
+        OnEndDialogue?.Invoke();
+        Debug.Log("Dialogue Ended");
         dialogueCanvas.SetActive(false);
     }
 
