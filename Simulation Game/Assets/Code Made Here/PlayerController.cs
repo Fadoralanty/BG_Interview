@@ -6,12 +6,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public Action OnInteractPressed; 
+    public Action OnInteractPressed;
+    public Action OnOpenInventory;
+    
     [SerializeField] private Vector2 _lookDir;
     private Movement _movement;
     private Vector2 _moveDir;
-    private PlayerInput _controls;
     private PlayerActions _playerActions;
+    private PlayerInput _controls;
 
     private void Start()
     {
@@ -21,6 +23,7 @@ public class PlayerController : MonoBehaviour
         _playerActions = new PlayerActions();
         _playerActions.PlayerControls.Enable();
         _playerActions.PlayerControls.Interact.performed += Interact;
+        _playerActions.PlayerControls.OpenInventory.performed += OpenInventory;
     }
 
     private void Update()
@@ -36,7 +39,14 @@ public class PlayerController : MonoBehaviour
             OnInteractPressed?.Invoke();
         } 
     }
-    
+
+    private void OpenInventory(InputAction.CallbackContext context)
+    {
+        if (context.performed) //When the open inventory button is pressed
+        {
+            OnOpenInventory?.Invoke();
+        } 
+    }
     private void FixedUpdate()
     {
         if (_moveDir != Vector2.zero)
