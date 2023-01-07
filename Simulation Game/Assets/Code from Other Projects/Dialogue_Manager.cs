@@ -10,6 +10,7 @@ public class Dialogue_Manager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private GameObject dialogueCanvas;
+    [SerializeField] private Image characterPortrait;
     [SerializeField, Range(0,0.10f)] private float writeSentenceSpeed = 0.05f;
     private Queue<string> _sentences;
     private void Awake()
@@ -29,10 +30,11 @@ public class Dialogue_Manager : MonoBehaviour
         dialogueCanvas.SetActive(false);
     }
 
-    public void StartDialogue(Dialogue dialogue)
+    public void StartDialogue(Dialogue dialogue,Sprite charPortrait)
     {
         dialogueCanvas.SetActive(true);
         nameText.text = dialogue._name;
+        characterPortrait.sprite = charPortrait;
         _sentences.Clear();
         foreach (string sentence in dialogue._sentences)
         {

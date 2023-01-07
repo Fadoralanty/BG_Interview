@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &378545842 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8155937626235195274, guid: da1806833e9ebd84fa40eb5b6930f593, type: 3}
+  m_PrefabInstance: {fileID: 4625865515837298192}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,6 +635,10 @@ PrefabInstance:
       propertyPath: dialogueCanvas
       value: 
       objectReference: {fileID: 1269690313}
+    - target: {fileID: 344389385, guid: 1a959326205d03a42aae3a25777f5c52, type: 3}
+      propertyPath: characterPortrait
+      value: 
+      objectReference: {fileID: 378545842}
     - target: {fileID: 2571216694729801864, guid: 1a959326205d03a42aae3a25777f5c52, type: 3}
       propertyPath: m_Name
       value: Dialogue Manager
