@@ -26,6 +26,7 @@ public class ToolTipSystem : MonoBehaviour
     }
     public static void Hide()
     {
-        current.ToolTip.SetActive(false);
+        if (current.ToolTip) current.ToolTip.SetActive(false);
     }
+    
 }

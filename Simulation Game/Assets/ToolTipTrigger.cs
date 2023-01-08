@@ -10,14 +10,20 @@ public class ToolTipTrigger : MonoBehaviour,IPointerEnterHandler,IPointerExitHan
     
     public void OnPointerEnter(PointerEventData eventData)
     {
-        ToolTipSystem.Show(content);
+        StartCoroutine(WaitToShowToolTip(0.3f));
     }
     
     public void OnPointerExit(PointerEventData eventData)
     {
+        StopAllCoroutines();
         ToolTipSystem.Hide();
     }
-    
+
+    IEnumerator WaitToShowToolTip(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        ToolTipSystem.Show(content);
+    }
     private void OnDisable()
     {
         ToolTipSystem.Hide();

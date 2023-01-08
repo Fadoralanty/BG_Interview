@@ -33,5 +33,11 @@ public class ToolTipScreenSpaceUI : MonoBehaviour
 
         parentRectTransform.anchoredPosition = anchoredPosition;
         
+        Vector2 mousePos = Mouse.current.position.ReadValue();
+        float pivotX = mousePos.x / Screen.width;
+        float pivotY = mousePos.y / Screen.height;
+
+        bgRectTransform.pivot = new Vector2(pivotX, pivotY);
+
     }
 }
