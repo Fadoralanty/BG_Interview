@@ -11,14 +11,14 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private int _maxItems = 10;
     [SerializeField] private PlayerController player;
     private Inventory _inventory;
-    private List<Item> UI_items;
+    private List<GameObject> UI_items;
     private bool _isInventoryOpen;
     [SerializeField] private GameObject ItemSlotPrefab;
     [SerializeField] private GameObject ItemSlotContainer;
     
     private void Awake()
     {
-        UI_items = new List<Item>();
+        UI_items = new List<GameObject>();
         _isInventoryOpen = false;
         InventoryCanvas.SetActive(_isInventoryOpen);
 
@@ -28,36 +28,42 @@ public class InventoryUI : MonoBehaviour
     {
         _inventory = player.Inventory;
         _maxItems = player.Inventory.MaxItems;
-        _inventory.OnItemAdded += UpdateInventory;
-        _inventory.OnItemRemoved += UpdateInventory;
+        _inventory.OnItemAdded += OnItemAddedListener;
+        _inventory.OnItemRemoved += OnItemRemovedListener;
         player.OnOpenInventory += OnOpenInventoryListener;
     }
 
-    private void OnOpenInventoryListener()
+    public void OnOpenInventoryListener()
     {
         _isInventoryOpen = !_isInventoryOpen;
         InventoryCanvas.SetActive(_isInventoryOpen);
-        UpdateInventory();
+        //UpdateInventory();
     }
-    private void UpdateInventory() 
+    public void OnItemAddedListener(Item item) 
     {
-        foreach (var item in _inventory.Items)
+        GameObject itemSlot = Instantiate(ItemSlotPrefab, ItemSlotContainer.transform);
+        itemSlot.GetComponent<Image>().sprite = item.Icon;
+        itemSlot.GetComponent<ToolTipTrigger>().content ="<b>"+ item.Name +"</b>"+"\n" + "Sold for: "+"<color=yellow>" +item.SellPrice + "$";
+        itemSlot.GetComponent<ItemSlot>().Item = item;
+        itemSlot.gameObject.SetActive(true);
+        UI_items.Add(itemSlot);
+    }
+    public void OnItemRemovedListener(Item item) //look for 1 instance of the item and delete it 
+    {
+        foreach (var itemSlot in UI_items)
         {
-            if (!UI_items.Contains(item))
+            if (itemSlot.GetComponent<ItemSlot>().Item == item)
             {
-                UI_items.Add(item);
-                GameObject itemSlot = Instantiate(ItemSlotPrefab, ItemSlotContainer.transform);
-                itemSlot.GetComponent<Image>().sprite = item.Icon;
-                itemSlot.GetComponent<ToolTipTrigger>().content = item.Name +"\n" + "Sold for: " +item.SellPrice + "$";
-                
-                itemSlot.gameObject.SetActive(true);
+                GameObject obj = itemSlot;
+                UI_items.Remove(itemSlot);
+                Destroy(obj);
+                break;
             }
         }
     }
-
     private void OnDestroy()
     {
-        _inventory.OnItemAdded -= UpdateInventory;
-        _inventory.OnItemRemoved -= UpdateInventory;
+        _inventory.OnItemAdded -= OnItemAddedListener;
+        _inventory.OnItemRemoved -= OnItemAddedListener;
     }
 }

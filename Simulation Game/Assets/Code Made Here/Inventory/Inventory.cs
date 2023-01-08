@@ -7,8 +7,8 @@ using UnityEngine;
 public class Inventory
 {
 
-    public Action OnItemAdded;
-    public Action OnItemRemoved;
+    public Action<Item> OnItemAdded;
+    public Action<Item> OnItemRemoved;
     public int MaxItems => maxItems;
     private int maxItems;
     public List<Item> Items => items;
@@ -29,14 +29,14 @@ public class Inventory
     {   
         if (items.Count + 1 > maxItems) return; 
         items.Add(item);
-        OnItemAdded.Invoke();
+        OnItemAdded.Invoke(item);
     }    
     public void RemoveItem(Item item)
     {
         if (items.Contains(item))
         {
             items.Remove(item);
-            OnItemRemoved.Invoke();
+            OnItemRemoved.Invoke(item);
         }
     }
 
