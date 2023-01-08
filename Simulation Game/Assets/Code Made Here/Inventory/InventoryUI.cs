@@ -48,6 +48,7 @@ public class InventoryUI : MonoBehaviour
                 UI_items.Add(item);
                 GameObject itemSlot = Instantiate(ItemSlotPrefab, ItemSlotContainer.transform);
                 itemSlot.GetComponent<Image>().sprite = item.Icon;
+                itemSlot.GetComponent<ItemSlot>().item = item;
                 itemSlot.gameObject.SetActive(true);
             }
         }
