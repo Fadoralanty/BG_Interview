@@ -6,6 +6,7 @@ using UnityEngine;
 public class ToolTipSystem : MonoBehaviour
 {
     public GameObject ToolTip;
+    public ToolTipScreenSpaceUI ToolTipScreenSpaceUI;
     private static ToolTipSystem current;
 
     private void Awake()
@@ -18,9 +19,10 @@ public class ToolTipSystem : MonoBehaviour
         Hide();
     }
 
-    public static void Show()
+    public static void Show(string content)
     {
         current.ToolTip.SetActive(true);
+        current.ToolTipScreenSpaceUI.SetText(content);
     }
     public static void Hide()
     {

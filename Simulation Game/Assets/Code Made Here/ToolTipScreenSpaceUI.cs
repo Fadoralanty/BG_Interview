@@ -13,11 +13,9 @@ public class ToolTipScreenSpaceUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textMeshProUGUI;
     [SerializeField] private Vector2 paddingSize=new Vector2(8,8);
 
-
-    private void Start()
+    private void Awake()
     {
-        SetText("hello");
-       // bgRectTransform.anchoredPosition=
+        //SetText("hello");
     }
 
     public void SetText(string tooltipText)

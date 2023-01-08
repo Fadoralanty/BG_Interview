@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,14 +6,19 @@ using UnityEngine.EventSystems;
 
 public class ToolTipTrigger : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 {
+    public string content;
     
-
     public void OnPointerEnter(PointerEventData eventData)
     {
-        ToolTipSystem.Show();
+        ToolTipSystem.Show(content);
     }
-
+    
     public void OnPointerExit(PointerEventData eventData)
+    {
+        ToolTipSystem.Hide();
+    }
+    
+    private void OnDisable()
     {
         ToolTipSystem.Hide();
     }
