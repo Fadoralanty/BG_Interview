@@ -49,6 +49,7 @@ public class InventoryUI : MonoBehaviour
         itemSlot.GetComponent<ItemSlot>().Item = item;
         Button button = itemSlot.GetComponent<Button>();
         button.onClick.AddListener(delegate { UIShop.SellItem(item, player); });
+        button.onClick.AddListener(delegate { player.EquipItem(item); });
         itemSlot.gameObject.SetActive(true);
         UI_items.Add(itemSlot);
     }

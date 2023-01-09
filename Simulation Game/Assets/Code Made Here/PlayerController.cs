@@ -11,17 +11,20 @@ public class PlayerController : MonoBehaviour
     public Action OnOpenInventory;
     public Wallet Wallet;
     public Inventory Inventory;
-    
+    [SerializeField] private GameObject EquipablePrefab;
+    [SerializeField] private Transform Head;
     [SerializeField] private Vector2 _lookDir;
+    private bool _isHeadEquipped;
     private Animator _animator;
     private Movement _movement;
     private Vector2 _moveDir;
     private PlayerActions _playerActions;
     private PlayerInput _controls;
-
+    
     private void Awake()
     {
         Inventory = new Inventory();
+        _isHeadEquipped = false;
     }
 
     private void Start()
@@ -61,6 +64,22 @@ public class PlayerController : MonoBehaviour
         {
             OnOpenInventory?.Invoke();
         } 
+    }
+
+    public void EquipItem(Item item)
+    {
+        if (!_isHeadEquipped)
+        {
+            _isHeadEquipped = true;
+            GameObject obj = Instantiate(EquipablePrefab, Head);
+            obj.GetComponent<SpriteRenderer>().sprite = item.Icon;
+        }
+        else
+        {
+            _isHeadEquipped = false;
+            GameObject obj = Head.transform.GetChild(0).gameObject;
+            Destroy(obj);
+        }
     }
     private void FixedUpdate()
     {

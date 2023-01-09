@@ -13137,6 +13137,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 671004836, guid: c1940d330d22feb4ca7b01f0d788d659, type: 3}
+      propertyPath: EquipablePrefab
+      value: 
+      objectReference: {fileID: 941372115979471031, guid: d54426cf9cf7e1f4596819bf4f9480db, type: 3}
     - target: {fileID: 3152479238974871335, guid: c1940d330d22feb4ca7b01f0d788d659, type: 3}
       propertyPath: m_RootOrder
       value: 3
