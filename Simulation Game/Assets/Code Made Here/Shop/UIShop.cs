@@ -9,30 +9,29 @@ using UnityEngine;
     public Action OnShopOpen;
     public Action OnShopClose;
     public Action OnNotEnoughMoney;
+    public List<Item> Items;
     [SerializeField] private GameObject ShopItemTemplatePrefab;
     [SerializeField] private GameObject Container;
     [SerializeField] private Transform panel;
-    [SerializeField] private List<Item> Items;
     [SerializeField] private PlayerController player;
     private bool _isShopUIOpen;
-
+    private List<GameObject> _UIitems;
     private void Awake()
     {
         _isShopUIOpen = false;
+        _UIitems = new List<GameObject>();
     }
 
     private void Start()
     {
-        foreach (var item in Items)
-        {
-            CreateItemButton(item);
-        }
+        //FillUIItems();
         CloseShopUI();
     }
 
     private void CreateItemButton(Item item)
     {
         GameObject newItem = Instantiate(ShopItemTemplatePrefab, panel);
+        _UIitems.Add(newItem);
         newItem.GetComponent<ToolTipTrigger>().content="<b>"+ item.Name +"</b>"+"\n" + "Sold for: "+"<color=yellow>" +item.BuyPrice + "$";
         newItem.transform.Find("Icon").GetComponent<Image>().sprite = item.Icon;
         Button button = newItem.transform.Find("Icon").GetComponent<Button>();
@@ -65,15 +64,34 @@ using UnityEngine;
         }
     }
 
+    public void ClearUIItems()
+    {
+        foreach (var gameObject in _UIitems)
+        {
+            GameObject obj = gameObject;
+            //_UIitems.Remove(gameObject);
+            Destroy(obj);
+        }
+    }
+
+    public void FillUIItems()
+    {
+        foreach (var item in Items)
+        {
+            CreateItemButton(item);
+        }
+    }
     public void OpenShopUI()
     {
         _isShopUIOpen = true;
         Container.SetActive(_isShopUIOpen);
+        FillUIItems();
         OnShopOpen?.Invoke();
     }
     public void CloseShopUI()
     {
         _isShopUIOpen = false;
+        ClearUIItems();
         Container.SetActive(_isShopUIOpen);
         OnShopClose?.Invoke();
     }

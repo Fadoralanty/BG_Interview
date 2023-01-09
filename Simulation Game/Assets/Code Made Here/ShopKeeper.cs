@@ -12,6 +12,7 @@ public class ShopKeeper : MonoBehaviour
     [SerializeField] private UIShop _shop;
     [SerializeField] private Dialogue Intro;
     [SerializeField] private Dialogue Warning;
+    [SerializeField] private List<Item> items;
     private float _distanceToPlayer;
     private bool isShopOpen;
     private void Awake()
@@ -38,19 +39,20 @@ public class ShopKeeper : MonoBehaviour
 
     private void OnInteractListener()
     {
-        if(isShopOpen)
+        if (_distanceToPlayer <= interactRange && !isShopOpen)
+        {
+            _shop.Items = items;
+            _shop.OpenShopUI();
+            player.OnOpenInventory?.Invoke();
+            isShopOpen = true;
+            Dialogue_Manager.instance.StartDialogue(Intro, characterPortrait);
+        }
+        else if(isShopOpen)
         {
             _shop.CloseShopUI();
             if(_inventoryUI.isInventoryOpen) player.OnOpenInventory?.Invoke();
             isShopOpen = false;
             Dialogue_Manager.instance.EndDialogue();
-        }
-        if (_distanceToPlayer <= interactRange && !isShopOpen)
-        {
-            _shop.OpenShopUI();
-            player.OnOpenInventory?.Invoke();
-            isShopOpen = true;
-            Dialogue_Manager.instance.StartDialogue(Intro, characterPortrait);
         }
     }
     private void OnDestroy()

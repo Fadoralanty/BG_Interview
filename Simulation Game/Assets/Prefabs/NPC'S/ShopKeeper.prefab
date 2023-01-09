@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3367018610336217377}
   - component: {fileID: 1014804780405853224}
   - component: {fileID: 2839421874666744455}
-  - component: {fileID: 5358084818810655542}
+  - component: {fileID: 8917803257100812299}
   m_Layer: 0
   m_Name: ShopKeeper
   m_TagString: Untagged
@@ -134,7 +134,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &5358084818810655542
+--- !u!114 &8917803257100812299
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,19 +143,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 4583701857601303153}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6420e6a5a446b25459d12aa421b038ed, type: 3}
+  m_Script: {fileID: 11500000, guid: dc9ef5a60d45620409e6d2f948d1d0ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dialogue:
-    _name: ShopKeeper
-    _sentences:
-    - 'Hello there
-
-'
-    - 'Good morning Aint it?
-
-'
+  characterPortrait: {fileID: 21300000, guid: ae2f0e71941470a4ca6dd0b6253bc713, type: 3}
   interactRange: 2
   player: {fileID: 0}
-  characterPortrait: {fileID: 21300000, guid: ae2f0e71941470a4ca6dd0b6253bc713, type: 3}
-  _isInDialogue: 0
+  _inventoryUI: {fileID: 0}
+  _shop: {fileID: 0}
+  Intro:
+    _name: Fruit Store
+    _sentences:
+    - What Are You Buying?
+  Warning:
+    _name: 
+    _sentences:
+    - ' You dont have enough money to buy that!'
+  items: []

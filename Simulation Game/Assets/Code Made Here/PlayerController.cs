@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public Inventory Inventory;
     
     [SerializeField] private Vector2 _lookDir;
+    private Animator _animator;
     private Movement _movement;
     private Vector2 _moveDir;
     private PlayerActions _playerActions;
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
         _movement = GetComponent<Movement>();
         _controls = GetComponent<PlayerInput>();
         Wallet = GetComponent<Wallet>();
+        _animator = GetComponentInChildren<Animator>();
         _playerActions = new PlayerActions();
         _playerActions.PlayerControls.Enable();
         _playerActions.PlayerControls.Interact.performed += Interact;
@@ -38,6 +40,11 @@ public class PlayerController : MonoBehaviour
     {
         _moveDir = _playerActions.PlayerControls.Movement.ReadValue<Vector2>();
          if (_moveDir != Vector2.zero) _lookDir = _moveDir;
+         if (_lookDir.x > 0 || _lookDir.y > 0) 
+             transform.rotation = Quaternion.Euler(0, 180, 0);
+         else 
+             transform.rotation = Quaternion.Euler(0, 0, 0);
+         
     }
 
     private void Interact(InputAction.CallbackContext context)
@@ -60,6 +67,12 @@ public class PlayerController : MonoBehaviour
         if (_moveDir != Vector2.zero)
         {
             _movement.Move(_moveDir.normalized);
+            _animator.SetBool("IsRunning",true);
+        }
+        else
+        {
+            _animator.SetBool("IsRunning",false);
+
         }
     }
     
