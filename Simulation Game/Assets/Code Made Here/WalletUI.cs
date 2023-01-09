@@ -12,11 +12,12 @@ public class WalletUI : MonoBehaviour
     private void Start()
     {
         playerWallet.OnCurrentMoneyChanged += OnMoneyChangedListener;
+        OnMoneyChangedListener(playerWallet.CurrentMoney);
     }
 
     private void OnMoneyChangedListener(int money)
     {
-        moneytext.text = "Money: " + money;
+        moneytext.text = "Money: " + "<color=yellow>" + "<b>"+ money + "</b>"+ " $" ;
     }
 
     private void OnDestroy()

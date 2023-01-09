@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5247360919023476116}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f60be3b4a9ac7747b1f2bde18a5a19e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Wallet: {fileID: 0}
   _lookDir: {x: 0, y: 0}
 --- !u!114 &671004839
 MonoBehaviour:
@@ -175,5 +176,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 181ce817e536c124bb6a982a72a2a6b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentMoney: 0
+  currentMoney: 100
   maxMoney: 9999

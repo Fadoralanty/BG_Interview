@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
-    [SerializeField] Dialogue Dialogue;
+    [SerializeField] private Dialogue Dialogue;
     [SerializeField] private float interactRange=2;
     [SerializeField] private PlayerController player;
     [SerializeField] private Sprite characterPortrait;
@@ -18,7 +18,7 @@ public class NPC : MonoBehaviour
         Dialogue_Manager.instance.OnEndDialogue += OnEndDialogueListener;
     }
 
-    private void OnInteractListener() //Todo Wait between interact inputs
+    private void OnInteractListener() //TODO Wait between interact inputs
     {
         if (_isInDialogue)
         {

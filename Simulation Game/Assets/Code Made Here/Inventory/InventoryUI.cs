@@ -7,23 +7,25 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
+    public bool isInventoryOpen;
+    [SerializeField] private UIShop UIShop;
     [SerializeField] private GameObject InventoryCanvas;
     [SerializeField] private int _maxItems = 10;
     [SerializeField] private PlayerController player;
-    private Inventory _inventory;
-    private List<GameObject> UI_items;
-    private bool _isInventoryOpen;
     [SerializeField] private GameObject ItemSlotPrefab;
     [SerializeField] private GameObject ItemSlotContainer;
-    
+    private Inventory _inventory;
+    private List<GameObject> UI_items;
+
     private void Awake()
     {
         UI_items = new List<GameObject>();
-        _isInventoryOpen = false;
-        InventoryCanvas.SetActive(_isInventoryOpen);
+        isInventoryOpen = false;
+        InventoryCanvas.SetActive(isInventoryOpen);
 
     }
 
+    
     private void Start()
     {
         _inventory = player.Inventory;
@@ -35,16 +37,18 @@ public class InventoryUI : MonoBehaviour
 
     public void OnOpenInventoryListener()
     {
-        _isInventoryOpen = !_isInventoryOpen;
-        InventoryCanvas.SetActive(_isInventoryOpen);
+        isInventoryOpen = !isInventoryOpen;
+        InventoryCanvas.SetActive(isInventoryOpen);
         //UpdateInventory();
     }
     public void OnItemAddedListener(Item item) 
     {
         GameObject itemSlot = Instantiate(ItemSlotPrefab, ItemSlotContainer.transform);
         itemSlot.GetComponent<Image>().sprite = item.Icon;
-        itemSlot.GetComponent<ToolTipTrigger>().content ="<b>"+ item.Name +"</b>"+"\n" + "Sold for: "+"<color=yellow>" +item.SellPrice + "$";
+        itemSlot.GetComponent<ToolTipTrigger>().content ="<b>"+ item.Name +"</b>"+"\n" + "Sold for: "+ "<b>" + "<color=yellow>" +item.SellPrice + "$";
         itemSlot.GetComponent<ItemSlot>().Item = item;
+        Button button = itemSlot.GetComponent<Button>();
+        button.onClick.AddListener(delegate { UIShop.SellItem(item, player); });
         itemSlot.gameObject.SetActive(true);
         UI_items.Add(itemSlot);
     }
@@ -65,5 +69,6 @@ public class InventoryUI : MonoBehaviour
     {
         _inventory.OnItemAdded -= OnItemAddedListener;
         _inventory.OnItemRemoved -= OnItemAddedListener;
+        player.OnOpenInventory -= OnOpenInventoryListener;
     }
 }
