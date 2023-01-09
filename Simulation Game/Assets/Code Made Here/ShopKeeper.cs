@@ -13,6 +13,8 @@ public class ShopKeeper : MonoBehaviour
     [SerializeField] private Dialogue Intro;
     [SerializeField] private Dialogue Warning;
     [SerializeField] private List<Item> items;
+    [SerializeField] private GameObject dialogueBoxImage;
+    [SerializeField] private Animator dialogueBoxAnimator;
     private float _distanceToPlayer;
     private bool isShopOpen;
     private void Awake()
@@ -35,6 +37,15 @@ public class ShopKeeper : MonoBehaviour
     {
         Vector2 diff = player.transform.position - transform.position;
         _distanceToPlayer= diff.magnitude;
+        if (_distanceToPlayer <= interactRange)
+        {
+            dialogueBoxImage.SetActive(true);
+            dialogueBoxAnimator.Play("Dialogue Box Pop out");
+        }
+        else
+        {
+            dialogueBoxImage.SetActive(false);
+        }
     }
 
     private void OnInteractListener()

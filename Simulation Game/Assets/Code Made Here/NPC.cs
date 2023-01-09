@@ -9,13 +9,16 @@ public class NPC : MonoBehaviour
     [SerializeField] private float interactRange=2;
     [SerializeField] private PlayerController player;
     [SerializeField] private Sprite characterPortrait;
-    [SerializeField]private bool _isInDialogue;
+    [SerializeField] private bool _isInDialogue;
+    [SerializeField] private GameObject dialogueBoxImage;
+    [SerializeField] private Animator dialogueBoxAnimator;
     private float _distanceToPlayer;
     private void Start()
     {
         _isInDialogue = false;
         player.OnInteractPressed += OnInteractListener;
         Dialogue_Manager.instance.OnEndDialogue += OnEndDialogueListener;
+        dialogueBoxImage.SetActive(false);
     }
 
     private void OnInteractListener() //TODO Wait between interact inputs
@@ -47,6 +50,15 @@ public class NPC : MonoBehaviour
         //calculate distance to player every frame
         Vector2 diff = player.transform.position - transform.position;
         _distanceToPlayer= diff.magnitude;
+        if (_distanceToPlayer <= interactRange)
+        {
+            dialogueBoxImage.SetActive(true);
+            dialogueBoxAnimator.Play("Dialogue Box Pop out");
+        }
+        else
+        {
+            dialogueBoxImage.SetActive(false);
+        }
     }
 
     private void OnDestroy()
