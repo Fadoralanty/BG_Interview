@@ -426,35 +426,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 311980148}
   m_CullTransparentMesh: 1
---- !u!1 &373114122 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 373114122, guid: afe8451cf04634343bc905b00f1d8dab, type: 3}
-  m_PrefabInstance: {fileID: 5677935650128947887}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &373114124 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 373114124, guid: afe8451cf04634343bc905b00f1d8dab, type: 3}
   m_PrefabInstance: {fileID: 5677935650128947887}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 373114122}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &373114126
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 373114122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27cd3a73798eaca4c92503b5852ab484, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  content: The money you currently have
 --- !u!114 &378545842 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8155937626235195274, guid: da1806833e9ebd84fa40eb5b6930f593, type: 3}
@@ -678,8 +660,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 150, y: 100}
-  m_SizeDelta: {x: 567.635, y: 100}
+  m_AnchoredPosition: {x: 224.15198, y: 113.20947}
+  m_SizeDelta: {x: 244.3037, y: 122.4191}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &563704349
 MonoBehaviour:
@@ -694,22 +676,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 1094366530, guid: a38c85eb4201b9443ae2b19230fda232, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &563704350
 CanvasRenderer:
@@ -1638,24 +1620,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1461670864 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1461670864, guid: afe8451cf04634343bc905b00f1d8dab, type: 3}
-  m_PrefabInstance: {fileID: 5677935650128947887}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1461670868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1461670864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27cd3a73798eaca4c92503b5852ab484, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  content: Inventory
 --- !u!1 &1467010403
 GameObject:
   m_ObjectHideFlags: 0
@@ -1888,7 +1852,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4672fc29c08ed4b4eaf3789248bfbe1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ToolTip: {fileID: 1794480324}
+  ToolTipBG: {fileID: 563704347}
+  ToolTipText: {fileID: 311980148}
   ToolTipScreenSpaceUI: {fileID: 1794480326}
 --- !u!1 &1745454656
 GameObject:
@@ -13255,6 +13220,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1776764535}
     m_Modifications:
+    - target: {fileID: 373114123, guid: afe8451cf04634343bc905b00f1d8dab, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 357.3343
+      objectReference: {fileID: 0}
+    - target: {fileID: 373114123, guid: afe8451cf04634343bc905b00f1d8dab, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 70.6912
+      objectReference: {fileID: 0}
+    - target: {fileID: 373114123, guid: afe8451cf04634343bc905b00f1d8dab, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -380.65796
+      objectReference: {fileID: 0}
+    - target: {fileID: 373114123, guid: afe8451cf04634343bc905b00f1d8dab, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -390.6544
+      objectReference: {fileID: 0}
+    - target: {fileID: 373114124, guid: afe8451cf04634343bc905b00f1d8dab, type: 3}
+      propertyPath: m_fontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 373114124, guid: afe8451cf04634343bc905b00f1d8dab, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 373114124, guid: afe8451cf04634343bc905b00f1d8dab, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
     - target: {fileID: 1103746743236991292, guid: afe8451cf04634343bc905b00f1d8dab, type: 3}
       propertyPath: m_Name
       value: InventoryCanvas
