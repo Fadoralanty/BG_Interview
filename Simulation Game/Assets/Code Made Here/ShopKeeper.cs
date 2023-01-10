@@ -57,6 +57,7 @@ public class ShopKeeper : MonoBehaviour
             player.OnOpenInventory?.Invoke();
             isShopOpen = true;
             Dialogue_Manager.instance.StartDialogue(Intro, characterPortrait);
+            StartCoroutine(WaitToEndDialogue(1.25f));
         }
         else if(isShopOpen)
         {
@@ -65,6 +66,12 @@ public class ShopKeeper : MonoBehaviour
             isShopOpen = false;
             Dialogue_Manager.instance.EndDialogue();
         }
+    }
+    private IEnumerator WaitToEndDialogue(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Dialogue_Manager.instance.EndDialogue();
+
     }
     private void OnDestroy()
     {
