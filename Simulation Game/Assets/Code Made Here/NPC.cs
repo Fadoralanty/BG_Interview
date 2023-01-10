@@ -29,6 +29,7 @@ public class NPC : MonoBehaviour
         }
         if (!_isInDialogue && _distanceToPlayer <= interactRange)
         {
+            player.StopMovement(false);
             _isInDialogue = true;
             Dialogue_Manager.instance.StartDialogue(Dialogue, characterPortrait);
         }
@@ -44,6 +45,7 @@ public class NPC : MonoBehaviour
     {
         yield return new WaitForSeconds(seconds);
         _isInDialogue = false;
+        player.StopMovement(!_isInDialogue);
     }
     private void Update()
     {
@@ -61,7 +63,7 @@ public class NPC : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         player.OnInteractPressed -= OnInteractListener;
     }

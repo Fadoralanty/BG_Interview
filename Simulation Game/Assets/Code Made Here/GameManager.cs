@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public Action<bool> OnPauseToggle;
-    private bool isGamePaused;
+    public bool isGamePaused;
     public bool isGameOver;
     private void Awake()
     {
@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(this);
-            return;
+            //return;
         }
         isGameOver = false;
         isGamePaused = false;
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
         AudioManager.instance.play("bg");
     }
 
-    private void PauseGame(bool pause)
+    public void PauseGame(bool pause)
     {
         if (pause)
         {

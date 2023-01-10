@@ -14,6 +14,7 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private PlayerController player;
     [SerializeField] private GameObject ItemSlotPrefab;
     [SerializeField] private GameObject ItemSlotContainer;
+    [SerializeField] private Animator inventoryCanvasAnimator;
     private Inventory _inventory;
     private List<GameObject> UI_items;
 
@@ -37,6 +38,8 @@ public class InventoryUI : MonoBehaviour
 
     public void OnOpenInventoryListener()
     {
+        if (isInventoryOpen) inventoryCanvasAnimator.Play("OpenInventory");
+        player.StopMovement(isInventoryOpen);
         isInventoryOpen = !isInventoryOpen;
         InventoryCanvas.SetActive(isInventoryOpen);
         //UpdateInventory();

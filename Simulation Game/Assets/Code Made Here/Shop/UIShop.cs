@@ -86,6 +86,7 @@ using System.Collections.Generic;
     public void OpenShopUI()
     {
         _isShopUIOpen = true;
+        player.StopMovement(!_isShopUIOpen);
         Container.SetActive(_isShopUIOpen);
         FillUIItems();
         OnShopOpen?.Invoke();
@@ -93,6 +94,7 @@ using System.Collections.Generic;
     public void CloseShopUI()
     {
         _isShopUIOpen = false;
+        player.StopMovement(!_isShopUIOpen);
         ClearUIItems();
         Container.SetActive(_isShopUIOpen);
         OnShopClose?.Invoke();

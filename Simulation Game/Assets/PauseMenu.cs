@@ -19,6 +19,7 @@ public class PauseMenu : MonoBehaviour
         GameManager.instance.OnPauseToggle += OnGamePauseToggleListener;
         _volumeSlider.value = _volume;
         //_volumeSlider.onValueChanged.AddListener(SetVolume);
+        container.SetActive(false);
     }
 
     private void OnGamePauseToggleListener(bool toggle)
@@ -43,9 +44,10 @@ public class PauseMenu : MonoBehaviour
     }
     public void Restart()
     {
+        GameManager.instance.PauseGame(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-    private void OnDestroy()
+    private void OnDisable()
     {
         GameManager.instance.OnPauseToggle -= OnGamePauseToggleListener;
     }

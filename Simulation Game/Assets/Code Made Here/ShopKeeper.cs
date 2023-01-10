@@ -74,7 +74,7 @@ public class ShopKeeper : MonoBehaviour
         Dialogue_Manager.instance.EndDialogue();
 
     }
-    private void OnDestroy()
+    private void OnDisable()
     {
         player.OnInteractPressed -= OnInteractListener;
         _shop.OnNotEnoughMoney -= OnNotEnoughMoneyListener;

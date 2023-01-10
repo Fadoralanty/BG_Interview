@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public Action OnOpenInventory;
     public Wallet Wallet;
     public Inventory Inventory;
+    public bool isGamePaused;
     [SerializeField] private GameObject EquipablePrefab;
     [SerializeField] private Transform Head;
     [SerializeField] private Vector2 _lookDir;
@@ -20,7 +21,6 @@ public class PlayerController : MonoBehaviour
     private Vector2 _moveDir;
     private PlayerActions _playerActions;
     private PlayerInput _controls;
-    
     private void Awake()
     {
         Inventory = new Inventory();
@@ -37,10 +37,31 @@ public class PlayerController : MonoBehaviour
         _playerActions.PlayerControls.Enable();
         _playerActions.PlayerControls.Interact.performed += Interact;
         _playerActions.PlayerControls.OpenInventory.performed += OpenInventory;
+        _playerActions.PlayerControls.OpenPauseMenu.performed += OpenPauseMenu;
+        GameManager.instance.OnPauseToggle += OnPauseToggleListener;
+    }
+
+    private void OpenPauseMenu(InputAction.CallbackContext context)
+    {
+        if (context.performed && isGamePaused)
+        {
+            GameManager.instance.PauseGame(false);
+        }
+        else if (context.performed && !isGamePaused)
+        {
+            GameManager.instance.PauseGame(true);
+        }
+    }
+
+    private void OnPauseToggleListener(bool obj)
+    {
+        isGamePaused = obj;
     }
 
     private void Update()
-    {
+    {   
+        if(isGamePaused) return;
+        
         _moveDir = _playerActions.PlayerControls.Movement.ReadValue<Vector2>();
          if (_moveDir != Vector2.zero) _lookDir = _moveDir;
          if (_lookDir.x > 0 || _lookDir.y > 0) 
@@ -52,6 +73,8 @@ public class PlayerController : MonoBehaviour
 
     private void Interact(InputAction.CallbackContext context)
     {
+        if(isGamePaused) return;
+
         if (context.performed) //When the interact button is pressed
         {
             OnInteractPressed?.Invoke();
@@ -60,6 +83,8 @@ public class PlayerController : MonoBehaviour
 
     private void OpenInventory(InputAction.CallbackContext context)
     {
+        if(isGamePaused) return;
+
         if (context.performed) //When the open inventory button is pressed
         {
             OnOpenInventory?.Invoke();
@@ -83,6 +108,8 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if(isGamePaused) return;
+        
         if (_moveDir != Vector2.zero)
         {
             _movement.Move(_moveDir.normalized);
@@ -94,5 +121,16 @@ public class PlayerController : MonoBehaviour
 
         }
     }
-    
+
+    public void StopMovement(bool canMove)
+    {
+        _movement.canMove = canMove;
+    }
+    private void OnDisable()
+    {
+        GameManager.instance.OnPauseToggle -= OnPauseToggleListener;
+        _playerActions.PlayerControls.Interact.performed -= Interact;
+        _playerActions.PlayerControls.OpenInventory.performed -= OpenInventory;
+        _playerActions.PlayerControls.OpenPauseMenu.performed -= OpenPauseMenu;
+    }
 }
