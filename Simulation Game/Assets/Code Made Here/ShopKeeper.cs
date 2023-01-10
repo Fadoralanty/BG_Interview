@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ShopKeeper : MonoBehaviour
 {
+    [SerializeField] private String shopName;
     [SerializeField] private Sprite characterPortrait;
     [SerializeField] private float interactRange = 2;
     [SerializeField] private PlayerController player;

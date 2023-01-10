@@ -1,7 +1,8 @@
  using System;
  using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+ using TMPro;
+ using UnityEngine;
  using UnityEngine.UI;
 
  public class UIShop : MonoBehaviour
@@ -11,6 +12,7 @@ using UnityEngine;
     public Action OnNotEnoughMoney;
     public List<Item> Items;
     [SerializeField] private GameObject ShopItemTemplatePrefab;
+    [SerializeField] private TextMeshProUGUI ShopName;
     [SerializeField] private GameObject Container;
     [SerializeField] private Transform panel;
     [SerializeField] private PlayerController player;
