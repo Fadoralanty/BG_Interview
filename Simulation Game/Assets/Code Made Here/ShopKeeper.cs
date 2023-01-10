@@ -54,6 +54,7 @@ public class ShopKeeper : MonoBehaviour
         if (_distanceToPlayer <= interactRange && !isShopOpen)
         {
             _shop.Items = items;
+            _shop.ShopName.text = shopName;
             _shop.OpenShopUI();
             player.OnOpenInventory?.Invoke();
             isShopOpen = true;

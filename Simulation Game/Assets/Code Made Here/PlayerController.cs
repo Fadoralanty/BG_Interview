@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public Wallet Wallet;
     public Inventory Inventory;
     public bool isGamePaused;
+    public bool _isShopOpen;
     [SerializeField] private GameObject EquipablePrefab;
     [SerializeField] private Transform Head;
     [SerializeField] private Vector2 _lookDir;
@@ -93,6 +94,8 @@ public class PlayerController : MonoBehaviour
 
     public void EquipItem(Item item)
     {
+        if (_isShopOpen) return;
+        
         if (!_isHeadEquipped)
         {
             _isHeadEquipped = true;

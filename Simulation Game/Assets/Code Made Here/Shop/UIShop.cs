@@ -11,8 +11,8 @@ using System.Collections.Generic;
     public Action OnShopClose;
     public Action OnNotEnoughMoney;
     public List<Item> Items;
+    public TextMeshProUGUI ShopName;
     [SerializeField] private GameObject ShopItemTemplatePrefab;
-    [SerializeField] private TextMeshProUGUI ShopName;
     [SerializeField] private GameObject Container;
     [SerializeField] private Transform panel;
     [SerializeField] private PlayerController player;
@@ -26,8 +26,7 @@ using System.Collections.Generic;
 
     private void Start()
     {
-        //FillUIItems();
-        CloseShopUI();
+        Container.SetActive(false);
     }
 
     private void CreateItemButton(Item item)
@@ -86,6 +85,7 @@ using System.Collections.Generic;
     public void OpenShopUI()
     {
         _isShopUIOpen = true;
+        player._isShopOpen = true;
         player.StopMovement(!_isShopUIOpen);
         Container.SetActive(_isShopUIOpen);
         FillUIItems();
@@ -94,6 +94,7 @@ using System.Collections.Generic;
     public void CloseShopUI()
     {
         _isShopUIOpen = false;
+        player._isShopOpen = false;
         player.StopMovement(!_isShopUIOpen);
         ClearUIItems();
         Container.SetActive(_isShopUIOpen);
